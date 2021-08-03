@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import CovidTracker from "./src/screen/covid-tracker-screen";
 ReactDOM.render(
-    <h1>Hello World</h1>,
+    <CovidTracker/>,
   document.getElementById('root')
 );
