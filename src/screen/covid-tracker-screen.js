@@ -16,7 +16,9 @@ const CovidTracker = memo(() => {
     return (
         <div>
             {data.map((item, i) => (
-                <div key={i}>{item.active}</div>
+                <div key={i} className="uk-text-primary uk-margin-large-top">
+                    {item.active}
+                </div>
             ))}
         </div>
     );
