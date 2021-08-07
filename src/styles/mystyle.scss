@@ -1,3 +1,110 @@
 @import "uikit/src/scss/variables-theme.scss";
 @import "uikit/src/scss/mixins-theme.scss";
 @import "uikit/src/scss/uikit-theme.scss";
+$primary: #a03c78;
+$gray-xs: #f3f4f6;
+$gray-sm: #d1d5db;
+$gray-md: #9ca3af;
+$gray-lg: #1f2937;
+$danger: #dc2626;
+$danger-xs: #fee2e2;
+$success: #059669;
+$success-xs: #d1eaf5;
+$font-xss: 10px;
+$font-xs: 12px;
+$font-sm: 16px;
+$font-md: 20px;
+$font-lg: 26px;
+body {
+    background-color: $gray-xs;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 20px 0px;
+}
+/*---font sizes----*/
+.fontXss {
+    font-size: $font-xss;
+}
+.fontXs {
+    font-size: $font-xs;
+}
+.fontSm {
+    font-size: $font-sm;
+}
+.fontMd {
+    font-size: $font-md;
+}
+.fontLg {
+    font-size: $font-lg;
+}
+.fontDanger {
+    color: $danger !important;
+}
+.fontSuccess {
+    color: $success !important;
+}
+.fontGrayXs {
+    color: $gray-xs;
+}
+.fontGrayMd {
+    color: $gray-md;
+}
+.caseOverviewCards {
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+
+    &.activeCase {
+        background-color: $danger-xs;
+        h2 {
+            color: $danger;
+        }
+    }
+    &.recoveredCase {
+        background-color: $success-xs;
+        h2 {
+            color: $success;
+        }
+    }
+    > h2 {
+        font-size: $font-lg;
+        font-weight: 500;
+        margin: 0px;
+    }
+    > p {
+        font-size: $font-sm;
+        margin: 0px;
+    }
+}
+.stateInfoCard {
+    margin-top: 20px;
+}
+.stateData {
+    label {
+        color: $gray-md;
+        font-size: $font-xs;
+    }
+    p {
+        color: $gray-lg;
+        margin: 0px;
+    }
+}
+.deltaInfoWrap {
+    background-color: $gray-sm;
+    margin: 10px -15px -15px -15px;
+    padding: 5px 15px;
+    p {
+        font-size: 13px;
+        margin: 0px;
+        font-weight: 500;
+    }
+    .deltaInfo {
+        font-size: 13px;
+        font-weight: 500;
+        label {
+            font-weight: 400;
+        }
+    }
+}
