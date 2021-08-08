@@ -8,7 +8,7 @@ $gray-md: #9ca3af;
 $gray-lg: #1f2937;
 $danger: #dc2626;
 $danger-xs: #fee2e2;
-$success: #059669;
+$success: #1cbc63;
 $success-xs: #d1eaf5;
 $font-xss: 10px;
 $font-xs: 12px;
@@ -17,6 +17,7 @@ $font-md: 20px;
 $font-lg: 26px;
 body {
     background-color: $gray-xs;
+    font-size: 13px;
 }
 
 h1 {
@@ -92,7 +93,7 @@ h1 {
     }
 }
 .deltaInfoWrap {
-    background-color: $gray-sm;
+    background-color: $gray-xs;
     margin: 10px -15px -15px -15px;
     padding: 5px 15px;
     p {
@@ -106,5 +107,52 @@ h1 {
         label {
             font-weight: 400;
         }
+    }
+}
+.indicatorWrap {
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 0px;
+    .indicatorBg {
+        position: absolute;
+
+        top: 0px;
+        left: 0px;
+        width: 10px;
+        height: 10px;
+        background-color: $success-xs;
+        border-radius: 50%;
+        line-height: 0px;
+        animation: indicatorbganim 1s infinite;
+    }
+    .indicator {
+        position: relative;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: $success;
+        border-radius: 50%;
+        line-height: 0px;
+        animation: indicatoranim 1s infinite;
+    }
+}
+@keyframes indicatorbganim {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
+@keyframes indicatoranim {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.5);
     }
 }

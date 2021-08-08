@@ -19,6 +19,10 @@ const CovidTracker = memo(() => {
                 Live Corona Updates{" "}
                 {data.length > 0 ? (
                     <span className="fontSm uk-inline-block uk-margin-medium-left">
+                        <span className="indicatorWrap">
+                            <span className="indicatorBg" />
+                            <span className="indicator" />
+                        </span>
                         {data[0].lastupdatedtime}
                     </span>
                 ) : null}
@@ -26,32 +30,32 @@ const CovidTracker = memo(() => {
             {data.length > 0 ? (
                 <div className="uk-grid uk-child-width-1-4@s uk-grid-column-small uk-margin-small-top">
                     <div>
-                        <div className="caseOverviewCards activeCase uk-card">
+                        <div className="caseOverviewCards activeCase uk-card uk-card-default">
                             <p>Active</p>
                             <h2> {data[0].active} </h2>
                         </div>
                     </div>
                     <div>
-                        <div className="caseOverviewCards">
+                        <div className="caseOverviewCards uk-card uk-card-default">
                             <p>Confirmed</p>
                             <h2> {data[0].confirmed} </h2>
                         </div>
                     </div>
                     <div>
-                        <div className="caseOverviewCards">
+                        <div className="caseOverviewCards uk-card uk-card-default">
                             <p>Deaths</p>
                             <h2> {data[0].deaths} </h2>
                         </div>
                     </div>
                     <div>
-                        <div className="caseOverviewCards recoveredCase">
+                        <div className="caseOverviewCards recoveredCase uk-card uk-card-default">
                             <p>Recovered</p>
                             <h2> {data[0].recovered} </h2>
                         </div>
                     </div>
                 </div>
             ) : null}
-            <div className="uk-margin-medium-top">
+            <div className="uk-margin-medium-top uk-margin-medium-bottom">
                 <div className="uk-text-bold">State Corona Update</div>
                 {data.slice(1).map((item, i) => (
                     <div
