@@ -1,6 +1,8 @@
 import React, { useEffect, useState, memo } from "react";
+import { connect } from "react-redux";
+import { increment, decrement } from "../actions/action.js";
 
-const CovidTracker = memo(() => {
+const CovidTracker = memo((props) => {
     const [data, setData] = useState([]);
     async function getData() {
         const res = await fetch("https://api.covid19india.org/data.json");
@@ -12,7 +14,8 @@ const CovidTracker = memo(() => {
         // console.log("efect");
         getData();
     }, []);
-    console.log(data);
+    console.log("---------------");
+    console.log(props.count);
     return (
         <div className="uk-container">
             <h1>
@@ -27,6 +30,9 @@ const CovidTracker = memo(() => {
                     </span>
                 ) : null}
             </h1>
+            <button onClick={props.increment}>Increment</button>
+            {props.count}
+            <button onClick={props.decrement}>decrement</button>
             {data.length > 0 ? (
                 <div className="uk-grid uk-child-width-1-4@s uk-grid-column-small uk-margin-small-top">
                     <div>
@@ -110,4 +116,12 @@ const CovidTracker = memo(() => {
     );
 });
 
-export default CovidTracker;
+const mapStateToProps = (state) => ({
+    count: state.calculationReducer.value,
+});
+const mapDispatchToProps = {
+    increment,
+    decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CovidTracker);
