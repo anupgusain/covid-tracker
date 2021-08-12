@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import store from "./src/reducers/store";
 import UIkit from "uikit";
 // import "uikit/src/scss/uikit-theme.scss";
-// UIkit.icon();
+UIkit.icon();
 import "./src/styles/mystyle.scss";
 // import "uikit/src/scss/uikit-theme.scss";
 import CovidTracker from "./src/screen/covid-tracker-screen";

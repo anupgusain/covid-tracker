@@ -1,8 +1,8 @@
 import { combineReducers, createStore } from "redux";
-import { calculationReducer } from "../reducers/reducer.js";
+import { indexReducer } from "../reducers/index-reducer.js";
 
 const createReducer = combineReducers({
-    calculationReducer: calculationReducer,
+    indexReducer: indexReducer,
 });
 
 const store = createStore(createReducer);

@@ -1,8 +1,9 @@
-export const increment = () => ({
-    type: "INCREMENT",
-    value: 2,
+export const setData = (data) => ({
+    type: "SET_DATA",
+    data: data,
 });
 
-export const decrement = () => ({
-    type: "DECREMENT",
+export const filterChange = (data) => ({
+    type: "CHANGE_FILTER",
+    data: { selected_filter: data.selected_filter, sort_data: data.new_data },
 });
