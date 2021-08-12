@@ -7,3 +7,8 @@ export const filterChange = (data) => ({
     type: "CHANGE_FILTER",
     data: { selected_filter: data.selected_filter, sort_data: data.new_data },
 });
+
+export const setLoader = (data) => ({
+    type: "SET_LOADER",
+    data: data,
+});

@@ -2,6 +2,7 @@ const initial_state = {
     datalist: [],
     filter_value: "",
     sort_data: [],
+    loader: false,
 };
 export const indexReducer = (state = initial_state, action) => {
     const newState = Object.assign({}, state);
@@ -17,6 +18,10 @@ export const indexReducer = (state = initial_state, action) => {
             newState.sort_data = action.data.sort_data;
             return newState;
         }
+    }
+    if (action.type === "SET_LOADER") {
+        newState.loader = action.data;
+        return newState;
     }
 
     return state;

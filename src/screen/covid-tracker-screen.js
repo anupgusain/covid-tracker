@@ -1,12 +1,14 @@
 import React, { useEffect, useState, memo } from "react";
 import { connect } from "react-redux";
-import { setData, filterChange } from "../actions/action.js";
+import { setData, filterChange, setLoader } from "../actions/action.js";
 
 const CovidTracker = memo((props) => {
     async function getData() {
+        props.SET_LOADER(true);
         const res = await fetch("https://api.covid19india.org/data.json");
         const actualData = await res.json();
         props.Set_Data(actualData.statewise);
+        props.SET_LOADER(false);
     }
     useEffect(() => {
         // console.log("efect");
@@ -45,7 +47,7 @@ const CovidTracker = memo((props) => {
     const data = props.data;
     const state_data =
         props.sort_data.length > 0 ? props.sort_data : props.data.slice(1);
-    console.log(props.filter_value);
+    console.log(props.loader);
     return (
         <div className="uk-container">
             <div className="uk-grid uk-margin-medium-top uk-margin-medium-bottom">
@@ -63,7 +65,7 @@ const CovidTracker = memo((props) => {
                         ) : null}
                     </h1>
                 </div>
-                <div className="uk-width-auto">
+                <div className="uk-width-auto@s">
                     <select
                         className="uk-select"
                         value={props.filter_val}
@@ -108,114 +110,129 @@ const CovidTracker = memo((props) => {
             ) : null}
             <div className="uk-margin-medium-top uk-margin-medium-bottom">
                 <div className="uk-text-bold">State Corona Update</div>
-                {state_data.map((item, i) => (
-                    <div
-                        key={i}
-                        className="uk-card uk-card-default uk-padding-small stateInfoCard"
-                    >
-                        <div className="uk-grid uk-grid-column-small">
-                            <div className="uk-width-1-1">
-                                {item.state}{" "}
-                                <span className="fontXs fontGrayMd">
-                                    ({item.lastupdatedtime})
-                                </span>
-                                {props.filter_value === "state" ? (
-                                    <span
-                                        className="fontDanger uk-inline"
-                                        style={{ fontSize: 8, marginLeft: 5 }}
-                                    >
-                                        ▼
-                                    </span>
-                                ) : null}
-                            </div>
-                            <div className="uk-width-1-4@s uk-width-1-2 stateData">
-                                <label>
-                                    Active{" "}
-                                    {props.filter_value === "active" ? (
-                                        <span
-                                            className="fontDanger uk-inline"
-                                            style={{
-                                                fontSize: 8,
-                                                marginLeft: 5,
-                                            }}
-                                        >
-                                            ▼
+                {props.loader ? (
+                    <h1 className="uk-text-center fontGrayMd">Loading...</h1>
+                ) : (
+                    <>
+                        {state_data.map((item, i) => (
+                            <div
+                                key={i}
+                                className="uk-card uk-card-default uk-padding-small stateInfoCard"
+                            >
+                                <div className="uk-grid uk-grid-column-small">
+                                    <div className="uk-width-1-1">
+                                        {item.state}{" "}
+                                        <span className="fontXs fontGrayMd">
+                                            ({item.lastupdatedtime})
                                         </span>
-                                    ) : null}
-                                </label>
-                                <p className="fontDanger">{item.active}</p>
-                            </div>
-                            <div className="uk-width-1-4@s uk-width-1-2 stateData">
-                                <label>
-                                    Confirmed
-                                    {props.filter_value === "confirmed" ? (
-                                        <span
-                                            className="fontDanger uk-inline"
-                                            style={{
-                                                fontSize: 8,
-                                                marginLeft: 5,
-                                            }}
-                                        >
-                                            ▼
-                                        </span>
-                                    ) : null}
-                                </label>
-                                <p>{item.confirmed}</p>
-                            </div>
-                            <div className="uk-width-1-4@s uk-width-1-2 stateData">
-                                <label>
-                                    Deaths
-                                    {props.filter_value === "deaths" ? (
-                                        <span
-                                            className="fontDanger uk-inline"
-                                            style={{
-                                                fontSize: 8,
-                                                marginLeft: 5,
-                                            }}
-                                        >
-                                            ▼
-                                        </span>
-                                    ) : null}
-                                </label>
-                                <p>{item.deaths}</p>
-                            </div>
-                            <div className="uk-width-1-4@s uk-width-1-2 stateData">
-                                <label>
-                                    Recovered
-                                    {props.filter_value === "recovered" ? (
-                                        <span
-                                            className="fontDanger uk-inline"
-                                            style={{
-                                                fontSize: 8,
-                                                marginLeft: 5,
-                                            }}
-                                        >
-                                            ▼
-                                        </span>
-                                    ) : null}
-                                </label>
-                                <p className="fontSuccess">{item.recovered}</p>
-                            </div>
-                        </div>
-                        <div className="deltaInfoWrap">
-                            <p>Delta Variant Update</p>
-                            <div className="uk-grid uk-grid-column-small uk-child-width-1-3@s">
-                                <div className="deltaInfo">
-                                    <label>Confirmed : </label>
-                                    {item.deltaconfirmed}
+                                        {props.filter_value === "state" ? (
+                                            <span
+                                                className="fontDanger uk-inline"
+                                                style={{
+                                                    fontSize: 8,
+                                                    marginLeft: 5,
+                                                }}
+                                            >
+                                                ▼
+                                            </span>
+                                        ) : null}
+                                    </div>
+                                    <div className="uk-width-1-4@s uk-width-1-2 stateData">
+                                        <label>
+                                            Active{" "}
+                                            {props.filter_value === "active" ? (
+                                                <span
+                                                    className="fontDanger uk-inline"
+                                                    style={{
+                                                        fontSize: 8,
+                                                        marginLeft: 5,
+                                                    }}
+                                                >
+                                                    ▼
+                                                </span>
+                                            ) : null}
+                                        </label>
+                                        <p className="fontDanger">
+                                            {item.active}
+                                        </p>
+                                    </div>
+                                    <div className="uk-width-1-4@s uk-width-1-2 stateData">
+                                        <label>
+                                            Confirmed
+                                            {props.filter_value ===
+                                            "confirmed" ? (
+                                                <span
+                                                    className="fontDanger uk-inline"
+                                                    style={{
+                                                        fontSize: 8,
+                                                        marginLeft: 5,
+                                                    }}
+                                                >
+                                                    ▼
+                                                </span>
+                                            ) : null}
+                                        </label>
+                                        <p>{item.confirmed}</p>
+                                    </div>
+                                    <div className="uk-width-1-4@s uk-width-1-2 stateData">
+                                        <label>
+                                            Deaths
+                                            {props.filter_value === "deaths" ? (
+                                                <span
+                                                    className="fontDanger uk-inline"
+                                                    style={{
+                                                        fontSize: 8,
+                                                        marginLeft: 5,
+                                                    }}
+                                                >
+                                                    ▼
+                                                </span>
+                                            ) : null}
+                                        </label>
+                                        <p>{item.deaths}</p>
+                                    </div>
+                                    <div className="uk-width-1-4@s uk-width-1-2 stateData">
+                                        <label>
+                                            Recovered
+                                            {props.filter_value ===
+                                            "recovered" ? (
+                                                <span
+                                                    className="fontDanger uk-inline"
+                                                    style={{
+                                                        fontSize: 8,
+                                                        marginLeft: 5,
+                                                    }}
+                                                >
+                                                    ▼
+                                                </span>
+                                            ) : null}
+                                        </label>
+                                        <p className="fontSuccess">
+                                            {item.recovered}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="deltaInfo">
-                                    <label>Deaths : </label>
-                                    {item.deltadeaths}
-                                </div>
-                                <div className="deltaInfo">
-                                    <label>Recovered : </label>
-                                    {item.deltarecovered}
+                                <div className="deltaInfoWrap">
+                                    <p>Delta Variant Update</p>
+                                    <div className="uk-grid uk-grid-column-small uk-child-width-1-3@s">
+                                        <div className="deltaInfo">
+                                            <label>Confirmed : </label>
+                                            {item.deltaconfirmed}
+                                        </div>
+                                        <div className="deltaInfo">
+                                            <label>Deaths : </label>
+                                            {item.deltadeaths}
+                                        </div>
+                                        <div className="deltaInfo">
+                                            <label>Recovered : </label>
+                                            {item.deltarecovered}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                ))}
+                        ))}
+                    </>
+                )}
             </div>
         </div>
     );
@@ -225,10 +242,12 @@ const mapStateToProps = (state) => ({
     data: state.indexReducer.datalist,
     filter_value: state.indexReducer.filter_value,
     sort_data: state.indexReducer.sort_data,
+    loader: state.indexReducer.loader,
 });
 const mapDispatchToProps = {
     Set_Data: setData,
     Filter_Change: filterChange,
+    SET_LOADER: setLoader,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CovidTracker);
